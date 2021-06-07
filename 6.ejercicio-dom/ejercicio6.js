@@ -1,14 +1,13 @@
-const paragraphs = document.querySelectorAll('p');
+let paragraphs = document.querySelectorAll('p');
 
-const regex = !/[^a-zA-Z0-9]/;
+const regex = /\W+/gm;
 
 for(let i = 0; i < paragraphs.length; i++){
-  const words = paragraphs[i].innerText;
-  if(words !== regex) {
-   words.replace('') 
-  }else {
-    words.join('');
-  }
+   const words = paragraphs[i].innerText.replaceAll(regex,' ').split(' ');
+   for(word of words) {
+     if(word.length >= 5) {
+      paragraphs[i] = paragraphs[i].innerText.replaceAll(word, `<u>${word}</u>`);
+     }
+}
 }
 
-console.log(words);
